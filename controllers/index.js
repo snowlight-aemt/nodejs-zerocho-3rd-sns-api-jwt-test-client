@@ -13,7 +13,7 @@ const request = async (req, api) => {
             req.session.jwt = tokenResult.data.token;
         }
 
-        return axios.get(`${URL}${api}`, {
+        return await axios.get(`${URL}${api}`, {
             headers: { authorization: req.session.jwt },
         });
     } catch (err) {
@@ -25,7 +25,7 @@ const request = async (req, api) => {
         }
         // 처리할 수 없는 에러...
         // TODO 처음 보는 문법
-        throw err.response;
+        return err.response;
     }
 };
 
